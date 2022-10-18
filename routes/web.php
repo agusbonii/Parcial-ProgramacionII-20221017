@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +20,12 @@ Route::get('/', [ProductoController::class, "listAll"]) -> name("home");
 Route::get('/inicio', [ProductoController::class, "listAll"]) -> name("home");
 
 Route::get('/login', function () { return view('usuario.login'); }) -> name("login") -> middleware("guest");
-Route::post('/auth/login', [UserController::class, "Login"]) -> name("login") -> middleware("guest");
+Route::post('/login', [UserController::class, "Login"]) -> name("login") -> middleware("guest");
 
-Route::get('/registro', function () { return view('usuario.registrar'); }) -> name("Registrarse") -> middleware("guest");
-Route::post('/registro', [UserController::class, "Register"]) -> name("Registrarse") -> middleware("guest");
+Route::get('/registro', function () { return view('usuario.registrar'); }) -> name("registrarse") -> middleware("guest");
+Route::post('/registro', [UserController::class, "Register"]) -> name("registrarse") -> middleware("guest");
+
+Route::get('/user/logout', [UserController::class, "Logout"]) -> name("logout") -> middleware("auth");
 
 
 Route::get('/producto/{index}', [ProductoController::class, "listByID"]) -> name("verProducto") -> middleware("guest");

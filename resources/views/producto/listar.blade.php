@@ -1,7 +1,9 @@
 @include('headerGeneral', ['Section' => $Producto->Nombre . ' (' . $Producto->Marca . ')'])
 
 <h1>{{ $Producto->Nombre }}</h1>
+@auth
 <a href="{{ url()->route('borrarProducto', $Producto->id) }}">Borrar</a>
+@endauth
 <p>Marca: {{ $Producto->Marca }}</p>
 <label for="Descripcion"> Descripcion:
     <br>

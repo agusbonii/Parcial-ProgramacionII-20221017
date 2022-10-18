@@ -11,6 +11,12 @@ class UserController extends Controller
 {
     public function Register(Request $request)
     {
+        $validateProduct = $request->validate([
+            'username' => 'required|max:255',
+            'FullName' => 'required|max:255',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
         $username = $request->post('username');
         $FullName = $request->post("FullName");
         $password = Hash::make($request->post("password"));
