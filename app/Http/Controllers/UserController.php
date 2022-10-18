@@ -11,43 +11,41 @@ class UserController extends Controller
 {
     public function Register(Request $request)
     {
-        $validateProduct = $request->validate([
+        $validateUser = $request->validate([
             'username' => 'required|max:255',
             'FullName' => 'required|max:255',
             'password' => 'required|min:8|confirmed',
+        ]); 
+
+        $username = $validateUser["username"];
+        $FullName = $validateUser["FullName"];
+        $password = Hash::make($validateUser["password"]);
+        
+        if (User::where('username', '=', $username) -> first() !== NULL)
+            return redirect()->back()->withErrors(trans('user.register.exists'));
+        
+        $User = User::create([
+            'username' => $username,
+            'FullName' => $FullName,
+            'password' => $password
         ]);
-
-        $username = $request->post('username');
-        $FullName = $request->post("FullName");
-        $password = Hash::make($request->post("password"));
-
-        if (User::where('username', $username)->first() === NULL) {
-            $User = new User();
-            $User->username = $username;
-            $User->FullName = $FullName;
-            $User->password = $password;
-
-            if ($User->save())
-                return redirect()->back()->withSuccess(trans('user.register.success'));
-
-            return redirect()->back()->withErrors(trans('user.register.inesperate'));
-        }
-        return redirect()->back()->withErrors(trans('user.register.exists'));
+        
+        if (isset($User))
+            return redirect()->back($status=201)->withSuccess(trans('user.register.success'));
+        
+        return redirect()->back()->withSuccess(trans('user.register.unexpected'));
     }
 
     public function Login(Request $request)
     {
-        $username = $request->post("username");
-        $password = $request->post("password");
+        $credentials = $request -> only("username","password");
         $rememberme = (bool) $request->post("rememberme");
-
-        $credentials = ['username' => $username, 'password' => $password];
 
         if (Auth::attempt($credentials, $rememberme)) {
             $request->session()->regenerate();
-            return redirect()->home();
+            return redirect()->back();
         }
-        return redirect()->back()->withErrors(trans('user.login.failed'));
+        return redirect()->back(402)->withErrors(trans('user.login.failed'));
     }
 
     public function Logout(Request $request)

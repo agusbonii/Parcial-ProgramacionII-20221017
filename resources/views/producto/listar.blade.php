@@ -12,3 +12,5 @@
 </label>
 <p>Stock: {{ $Producto->Stock }}</p>
 <h2><a href="{{ url()->route('home') }}">Regresar</a></h2>
+
+@include('footerGeneral')

@@ -28,9 +28,9 @@ Route::post('/registro', [UserController::class, "Register"]) -> name("registrar
 Route::get('/user/logout', [UserController::class, "Logout"]) -> name("logout") -> middleware("auth");
 
 
-Route::get('/producto/{index}', [ProductoController::class, "listByID"]) -> name("verProducto") -> middleware("guest");
+Route::get('/producto/{index}', [ProductoController::class, "listByID"]) -> name("verProducto");
 Route::get('/productos/nuevo', function () { return view("producto.nuevo");}) -> name("crearProducto") -> middleware("auth");
 Route::post('/productos/nuevo', [ProductoController::class, "Create"]) -> name("crearProducto") -> middleware("auth");
-Route::get('/productos', [ProductoController::class, "listAll"]) -> name("productos") -> middleware("guest");
+Route::get('/productos', [ProductoController::class, "listAll"]) -> name("productos");
 
 Route::get('/producto/borrar/{index}', [ProductoController::class, "Delete"]) -> name("borrarProducto") -> middleware("auth");

@@ -10,14 +10,10 @@
 
 <body>
     <a href="{{ url()->route('home') }}"> Inicio</a>
-    <a href="{{ url()->route('productos') }}"> Productos</a>
     @guest
-        <a href="{{ url()->route('login') }}"> Loguearse</a>
-        <a href="{{ url()->route('registrarse') }}"> Registrarse</a>
+    <a href="{{ url()->route('login') }}"> Loguearse</a>
+    <a href="{{ url()->route('registrarse') }}"> Registrarse</a>
     @endguest
     @auth
-        <a href="{{ url()->route('logout') }}" > Cerrar Sesion</a>
+    <a href="{{ url()->route('logout') }}"> Cerrar Sesion</a>
     @endauth
-</body>
-
-</html>

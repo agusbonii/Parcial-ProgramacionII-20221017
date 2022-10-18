@@ -10,5 +10,7 @@
 </form>
 
 @if ($errors !== NULL)
-    <div style="color: red;"> {{ $errors -> first() }} </div>
+<div style="color: red;"> {{ $errors -> first() }} </div>
 @endif
+
+@include('footerGeneral')

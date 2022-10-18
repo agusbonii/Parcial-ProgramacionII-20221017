@@ -16,7 +16,12 @@
 <label for="Descripcion"></label>
 <textarea name="Descripcion" readonly>{{ $Producto->Descripcion }}</textarea>
 <p>Stock: {{ $Producto->Stock }}</p>
+@auth
 <br>
 <a href="{{ url()->route('borrarProducto', $Producto->id) }}">Borrar</a>
+@endauth
 <hr>
 @endforeach
+
+
+@include('footerGeneral')
