@@ -31,21 +31,24 @@ class UserController extends Controller
         ]);
         
         if (isset($User))
-            return redirect()->back($status=201)->withSuccess(trans('user.register.success'));
-        
+            return back($status=201)->withSuccess(trans('user.register.success'));
+            
         return redirect()->back()->withSuccess(trans('user.register.unexpected'));
     }
 
     public function Login(Request $request)
     {
-        $credentials = $request -> only("username","password");
+        $credentials = $request->validate([
+            'username' => 'required|max:255',
+            'password' => 'required|min:8',
+        ]); 
         $rememberme = (bool) $request->post("rememberme");
 
         if (Auth::attempt($credentials, $rememberme)) {
             $request->session()->regenerate();
-            return redirect()->back();
+            return redirect()->home();
         }
-        return redirect()->back(402)->withErrors(trans('user.login.failed'));
+        return redirect()->back()->withErrors(trans('user.login.failed'));
     }
 
     public function Logout(Request $request)

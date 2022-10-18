@@ -11,7 +11,9 @@
 
 
 @if (Session::has('success'))
-<div style="color: green;"> {{ Session::get('success') }} </div>
+<div style="color: green;"> {{ Session::get('success') }}
+<a href="{{ url()->route('login'); }}">Loguearse</a>
+</div>
 @endif
 
 @if ($errors !== NULL)
