@@ -9,15 +9,15 @@
 </head>
 
 <body>
+    <a href="{{ url()->route('home') }}"> Inicio</a>
+    <a href="{{ url()->route('productos') }}"> Productos</a>
     {{-- @guest
         <a href="{{ url()->route('login') }}"> Loguearse</a>
         <a href="{{ url()->route('register') }}"> Registrarse</a>
     @endguest --}}
-    {{-- @auth
-        <a href="{{ url()->route('home') }}" > Inicio</a> --}}
-        <a href="{{ url()->route('productos') }}" > Productos</a>
-        {{-- <a href="{{ url()->route('logout') }}" > Cerrar Sesion</a>
-    @endauth --}}
+    @auth
+        {{-- <a href="{{ url()->route('logout') }}" > Cerrar Sesion</a> --}}
+    @endauth
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 @include('headerGeneral', ['Section' => $Producto->Nombre . ' (' . $Producto->Marca . ')'])
 
 <h1>{{ $Producto->Nombre }}</h1>
-{{-- <a href="{{ url()->route('borrarProducto') . '/' . $Producto->id }}">Borrar</a> --}}
+<a href="{{ url()->route('borrarProducto', $Producto->id) }}">Borrar</a>
 <p>Marca: {{ $Producto->Marca }}</p>
 <label for="Descripcion"> Descripcion:
     <br>
