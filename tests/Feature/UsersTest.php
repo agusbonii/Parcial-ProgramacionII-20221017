@@ -33,8 +33,7 @@ class UsersTest extends TestCase
 
         $responseCreate = $this->post(url()->route('login'), ['username' => $username, 'password' => $password]);
 
-        var_dump($responseCreate);
-        $responseCreate->assertStatus(200);
-        $responseCreate->assertSessionHas("success", trans('user.register.success'));
+        $responseCreate->assertStatus(302);
+        $responseCreate->assertRedirect(url()->route('home'));
     }
 }
