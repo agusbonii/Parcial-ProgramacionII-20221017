@@ -20,9 +20,21 @@ class UsersTest extends TestCase
         $FullName = Str::random(8) . ' ' . Str::random(10);
         $password = Str::random(8);
 
-        $responseCreate = $this->post(url()->route('registrarse'),['username' => $username, 'FullName' => $FullName, 'password' => $password, 'password_confirmation' => $password]);
+        $responseCreate = $this->post(url()->route('registrarse'), ['username' => $username, 'FullName' => $FullName, 'password' => $password, 'password_confirmation' => $password]);
 
         $responseCreate->assertStatus(201);
-        $responseValidate = $responseCreate -> assertSessionHas("success", trans('user.register.success'));
+        $responseCreate->assertSessionHas("success", trans('user.register.success'));
+    }
+
+    public function test_LoguearUsuario()
+    {
+        $username = "abonilla-test";
+        $password = "agus1234";
+
+        $responseCreate = $this->post(url()->route('login'), ['username' => $username, 'password' => $password, 'password_confirmation' => $password]);
+
+        $responseCreate->assertStatus(200);
+        var_dump($responseCreate);
+        $responseCreate->assertSessionHas("success", trans('user.register.success'));
     }
 }
