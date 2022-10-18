@@ -27,7 +27,7 @@ class ProductoController extends Controller
 
     public function listByID($index)
     {
-        $Producto = Producto::findOrFail($index->id)->first();
+        $Producto = Producto::findOrFail($index);
 
         return view('producto.listar', ['Producto' => $Producto]);
     }
@@ -41,7 +41,7 @@ class ProductoController extends Controller
     public function Delete($index)
     {
         try {
-            $Producto = Producto::destroy($index->id);
+            $Producto = Producto::destroy($index);
             return redirect()->home()->withSuccess(trans('product.delete.success'));
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $ex) {
             return redirect()->home()->withSuccess(trans('product.delete.failed'));
