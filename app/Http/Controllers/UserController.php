@@ -31,7 +31,7 @@ class UserController extends Controller
         ]);
         
         if (isset($User))
-            return back($status=201)->withSuccess(trans('user.register.success'));
+            return redirect()->back($status=201)->withSuccess(trans('user.register.success'));
             
         return redirect()->back()->withSuccess(trans('user.register.unexpected'));
     }
