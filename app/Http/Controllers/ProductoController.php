@@ -25,7 +25,7 @@ class ProductoController extends Controller
         return redirect()->home()->withSuccess(trans('product.create.success'));
     }
 
-    public function listByID(Producto $index)
+    public function listByID($index)
     {
         $Producto = Producto::findOrFail($index->id)->first();
 
@@ -38,7 +38,7 @@ class ProductoController extends Controller
         return view('producto.inicio', ['Productos' => $Productos]);
     }
 
-    public function Delete(Producto $index)
+    public function Delete($index)
     {
         try {
             $Producto = Producto::destroy($index->id);
