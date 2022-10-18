@@ -31,10 +31,10 @@ class UsersTest extends TestCase
         $username = "abonilla-test";
         $password = "agus1234";
 
-        $responseCreate = $this->post(url()->route('login'), ['username' => $username, 'password' => $password, 'password_confirmation' => $password]);
+        $responseCreate = $this->post(url()->route('login'), ['username' => $username, 'password' => $password]);
 
-        $responseCreate->assertStatus(200);
         var_dump($responseCreate);
+        $responseCreate->assertStatus(200);
         $responseCreate->assertSessionHas("success", trans('user.register.success'));
     }
 }
